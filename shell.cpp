@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <fstream>
+#include <vector>
 
 // Gets the username of user and anchor >>>.
 int printUserName(){
@@ -17,6 +18,33 @@ std::string getCommandInput(){
     std::string command;
     std::getline(std::cin, command);
     return command;
+}
+
+// Parses command input by whitespace.
+std::vector<std::string> parseCommandInput(std::string commandInput){
+    std::string next;
+    std::vector<std::string> result;
+    // Iterates each character with const_iterator.
+    for (std::string::const_iterator iterator = commandInput.begin(); 
+            iterator != commandInput.end(); iterator ++){
+        // Adds the token into result vector 
+        // if we have characters accumulated 
+        // when the iterator hits whitespace.
+        if (*iterator == ' '){
+            if (!next.empty()){
+                result.push_back(next);
+                next.clear();
+            }
+        } 
+        // Add next character into the sequence.
+        else {
+            next += *iterator;
+        }
+    }
+    if (!next.empty()){
+        result.push_back(next);
+    }
+    return result;    
 }
 
 // Checks if the input command equals to "exit".
@@ -55,17 +83,20 @@ int main() {
     // Boolean to control the program running state.
     bool isRunning = true;
     
-        std::string listdirCommand = "listdir";
-        std::string mycomputernameCommand = "mycomputername";
-        std::string whatsmyipCommand = "whatsmyip";
-        std::string printfileCommand = "printfile";
+    std::string listdirCommand = "listdir";
+    std::string mycomputernameCommand = "mycomputername";
+    std::string whatsmyipCommand = "whatsmyip";
+    std::string printfileCommand = "printfile";
 
     // While loop until "exit" command is given.
     // takes input and executes the command in a loop.
     while (isRunning)
     {
         printUserName();
-        std::string command = getCommandInput();
+        std::string commandInput = getCommandInput();
+        std::vector<std::string> parsedInput = parseCommandInput(commandInput);
+        std::string command = parsedInput[0];
+
         checkExit(command, isRunning);
 
         if (command == listdirCommand){
