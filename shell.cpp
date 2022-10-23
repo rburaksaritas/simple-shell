@@ -29,15 +29,30 @@ int checkExit(std::string command, bool &isRunning){
     return 0;
 }
 
+// Prints out the contents of the current directory.
+int listdir(){
+    system("ls");
+    return 1;
+}
+
+
 int main() {
     // Boolean to control the program running state.
     bool isRunning = true;
     
+        std::string listdirCommand = "listdir";
+        std::string mycomputernameCommand = "mycomputername";
+        std::string whatsmyipCommand = "whatsmyip";
+
     while (isRunning)
     {
         printUserName();
         std::string command = getCommandInput();
         checkExit(command, isRunning);
+
+        if (command == listdirCommand){
+            listdir();
+        } 
     }
     
     return 0;
