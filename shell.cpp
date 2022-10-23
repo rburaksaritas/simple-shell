@@ -78,6 +78,22 @@ int whatsMyIp(){
     return 1;
 }
 
+// Take a file name as an argument, read its content 
+// and write them on the standard output, line by line. 
+int printFile(std::string fileName){
+    std::string commandLine = std::string("while IFS= read -r line\n") +
+    std::string("do\n") + 
+    std::string("   read input </dev/tty\n") +
+    std::string("    if [[ -z $input ]]\n") +
+    std::string("    then\n") +
+    std::string("        echo $line\n") +
+    std::string("    fi\n") +
+    std::string("done < ") + fileName;
+    std::cout << commandLine << std::endl;
+    system(commandLine.c_str());
+    return 1;
+}
+
 // Main function where the program runs.
 int main() {
     // Boolean to control the program running state.
@@ -105,6 +121,11 @@ int main() {
             myComputerName(); 
         } else if (command == whatsmyipCommand){
             whatsMyIp();
+        } else if (command == printfileCommand){
+            if (parsedInput.size() == 2){
+                std::string fileName = parsedInput[1];
+                printFile(fileName);
+            }
         }
     }
     
