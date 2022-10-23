@@ -30,12 +30,20 @@ int checkExit(std::string command, bool &isRunning){
 }
 
 // Prints out the contents of the current directory.
-int listdir(){
+int listDir(){
     system("ls");
     return 1;
 }
 
+// Prints the given name of the used device.
+int myComputerName(){
+    char hostname[HOST_NAME_MAX];
+    gethostname(hostname, HOST_NAME_MAX);
+    std::cout << hostname << std::endl;
+    return 1;
+}
 
+// Main function where the program runs.
 int main() {
     // Boolean to control the program running state.
     bool isRunning = true;
@@ -44,6 +52,8 @@ int main() {
         std::string mycomputernameCommand = "mycomputername";
         std::string whatsmyipCommand = "whatsmyip";
 
+    // While loop until "exit" command is given.
+    // takes input and executes the command in a loop.
     while (isRunning)
     {
         printUserName();
@@ -51,8 +61,10 @@ int main() {
         checkExit(command, isRunning);
 
         if (command == listdirCommand){
-            listdir();
-        } 
+            listDir();
+        } else if (command == mycomputernameCommand){
+            myComputerName(); 
+        }
     }
     
     return 0;
