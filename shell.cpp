@@ -1,7 +1,8 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <unistd.h>
 #include <limits.h>
+#include <fstream>
 
 // Gets the username of user and anchor >>>.
 int printUserName(){
@@ -57,6 +58,7 @@ int main() {
         std::string listdirCommand = "listdir";
         std::string mycomputernameCommand = "mycomputername";
         std::string whatsmyipCommand = "whatsmyip";
+        std::string printfileCommand = "printfile";
 
     // While loop until "exit" command is given.
     // takes input and executes the command in a loop.
