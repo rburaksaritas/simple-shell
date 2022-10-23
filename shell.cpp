@@ -43,6 +43,12 @@ int myComputerName(){
     return 1;
 }
 
+// Prints out the current ip adress.
+int whatsMyIp(){
+    system("hostname -I");
+    return 1;
+}
+
 // Main function where the program runs.
 int main() {
     // Boolean to control the program running state.
@@ -64,6 +70,8 @@ int main() {
             listDir();
         } else if (command == mycomputernameCommand){
             myComputerName(); 
+        } else if (command == whatsmyipCommand){
+            whatsMyIp();
         }
     }
     
