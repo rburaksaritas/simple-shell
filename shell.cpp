@@ -83,15 +83,21 @@ int whatsMyIp(){
 int printFile(std::string fileName){
     std::string commandLine = std::string("while IFS= read -r line\n") +
     std::string("do\n") + 
-    std::string("   read input </dev/tty\n") +
+    std::string("   echo -en \033[1A\n") +  // Prevent blank lines between lines.
+    std::string("   read input </dev/tty\n") + // Enter input.
     std::string("    if [[ -z $input ]]\n") +
     std::string("    then\n") +
-    std::string("        echo $line\n") +
+    std::string("        echo $line\n") +   // Print line.
     std::string("    fi\n") +
     std::string("done < ") + fileName;
-    std::cout << commandLine << std::endl;
     system(commandLine.c_str());
     return 1;
+}
+
+// Remove paranthesis of given file name as an argument.
+std::string removeParanthesis(std::string fileName){
+    fileName = fileName.substr(1, fileName.length()-2);
+    return fileName;
 }
 
 // Main function where the program runs.
@@ -124,6 +130,7 @@ int main() {
         } else if (command == printfileCommand){
             if (parsedInput.size() == 2){
                 std::string fileName = parsedInput[1];
+                fileName = removeParanthesis(fileName);
                 printFile(fileName);
             }
         }
