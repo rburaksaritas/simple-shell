@@ -94,12 +94,6 @@ int printFile(std::string fileName){
     return 1;
 }
 
-// Remove paranthesis of given file name as an argument.
-std::string removeParanthesis(std::string fileName){
-    fileName = fileName.substr(1, fileName.length()-2);
-    return fileName;
-}
-
 // Takes a file name as an argument, and redirect the standard output
 // to a new file using the redirection operator, >, (greater than symbol).
 int printFile(std::string sourceFile, std::string newFile){
@@ -138,7 +132,6 @@ int main() {
         } else if (command == printfileCommand){
             if (parsedInput.size() == 2){
                 std::string fileName = parsedInput[1];
-                fileName = removeParanthesis(fileName);
                 printFile(fileName);
             } else if (parsedInput.size() == 4){
                 std::string sourceFile = parsedInput[1];
