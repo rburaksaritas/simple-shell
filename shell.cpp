@@ -100,6 +100,14 @@ std::string removeParanthesis(std::string fileName){
     return fileName;
 }
 
+// Takes a file name as an argument, and redirect the standard output
+// to a new file using the redirection operator, >, (greater than symbol).
+int printFile(std::string sourceFile, std::string newFile){
+    std::string commandLine = "cp " + sourceFile + " " + newFile;
+    system(commandLine.c_str());
+    return 1;
+}
+
 // Main function where the program runs.
 int main() {
     // Boolean to control the program running state.
@@ -132,6 +140,10 @@ int main() {
                 std::string fileName = parsedInput[1];
                 fileName = removeParanthesis(fileName);
                 printFile(fileName);
+            } else if (parsedInput.size() == 4){
+                std::string sourceFile = parsedInput[1];
+                std::string newFile = parsedInput[3];
+                printFile(sourceFile, newFile);
             }
         }
     }
