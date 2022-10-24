@@ -113,6 +113,13 @@ if (std::find(history.begin(), history.end(), commandLine) != history.end()){
     }
 }
 
+// Opens the default text editor.
+int helloText(){
+    std::string commandLine = "touch untitled.txt\n xdg-open untitled.txt";
+    system(commandLine.c_str());
+    return 1;
+}   
+
 // Main function where the program runs.
 int main() {
     // Boolean to control the program running state.
@@ -125,6 +132,7 @@ int main() {
     std::string whatsmyipCommand = "whatsmyip";
     std::string printfileCommand = "printfile";
     std::string dididothatCommand = "dididothat";
+    std::string hellotextCommand = "hellotext";
 
     // While loop until "exit" command is given.
     // takes input and executes the command in a loop.
@@ -164,6 +172,10 @@ int main() {
             // remove last quote.
             givenCommand.pop_back();
             std::cout << didIDoThat(givenCommand, history) << std::endl;
+        } else if (command == hellotextCommand){
+            helloText();
+        } else {
+            std::cout << "";
         }
     }
     
