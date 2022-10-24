@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 // Gets the username of user and anchor >>>.
 int printUserName(){
@@ -102,15 +103,28 @@ int printFile(std::string sourceFile, std::string newFile){
     return 1;
 }
 
+// Searches a simple command in up to maximum 15 commands 
+// that are executed before. The output is a simple "Yes" or "No".
+std::string didIDoThat(std::string commandLine, std::vector<std::string> history){
+if (std::find(history.begin(), history.end(), commandLine) != history.end()){
+        return "Yes";
+    } else{
+        return "No";
+    }
+}
+
 // Main function where the program runs.
 int main() {
     // Boolean to control the program running state.
     bool isRunning = true;
-    
+    // Vector to store command history.
+    std::vector<std::string> history;
+
     std::string listdirCommand = "listdir";
     std::string mycomputernameCommand = "mycomputername";
     std::string whatsmyipCommand = "whatsmyip";
     std::string printfileCommand = "printfile";
+    std::string dididothatCommand = "dididothat";
 
     // While loop until "exit" command is given.
     // takes input and executes the command in a loop.
@@ -120,6 +134,18 @@ int main() {
         std::string commandInput = getCommandInput();
         std::vector<std::string> parsedInput = parseCommandInput(commandInput);
         std::string command = parsedInput[0];
+        // Push command line to history.
+        history.push_back(commandInput);
+        // Remove first element if the size exceeds 15.
+        if (history.size()>15){
+            history.erase(history.begin());
+        }
+
+        for (int i = 0; i < history.size(); i++)
+        {
+            std::cout << "history elem: " << history[i] << std::endl;
+        }
+        
 
         checkExit(command, isRunning);
 
@@ -138,6 +164,12 @@ int main() {
                 std::string newFile = parsedInput[3];
                 printFile(sourceFile, newFile);
             }
+        } else if (command == dididothatCommand){
+            // remove dididothat part and quotes from input string.
+            std::string givenCommand = commandInput.substr(12, commandInput.length()-12);
+            // remove last quote.
+            givenCommand.pop_back();
+            std::cout << didIDoThat(givenCommand, history) << std::endl;
         }
     }
     
