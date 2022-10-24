@@ -139,13 +139,7 @@ int main() {
         // Remove first element if the size exceeds 15.
         if (history.size()>15){
             history.erase(history.begin());
-        }
-
-        for (int i = 0; i < history.size(); i++)
-        {
-            std::cout << "history elem: " << history[i] << std::endl;
-        }
-        
+        }        
 
         checkExit(command, isRunning);
 
