@@ -50,6 +50,12 @@ std::vector<std::string> parseCommandInput(std::string commandInput){
     if (!next.empty()){
         result.push_back(next);
     }
+    // If the input is empty, 
+    // push empty string to prevent segmentation fault.
+    if (commandInput == ""){
+        result.push_back("");
+    }
+
     return result;    
 }
 
@@ -190,8 +196,10 @@ int main() {
             std::cout << didIDoThat(givenCommand, history) << std::endl;
         } else if (command == hellotextCommand){
             helloText();
-        } else {
-            std::cout << "";
+        } else if (command == ""){
+            continue;
+        } else if (command != "exit"){
+            std::cout << "error: Command not found" << std::endl;
         }
     }
     
