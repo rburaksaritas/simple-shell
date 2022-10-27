@@ -93,16 +93,16 @@ int whatsMyIp(){
 // Take a file name as an argument, read its content 
 // and write them on the standard output, line by line. 
 int printFile(std::string fileName){
-    std::string commandLine = std::string("while IFS= read -r line\n") +
-        std::string("do\n") + 
-        std::string("   echo -en \033[1A\n") +  // Prevent blank lines between lines.
-        std::string("   read input </dev/tty\n") + // Enter input.
-        std::string("    if [[ -z $input ]]\n") +
-        std::string("    then\n") +
-        std::string("        echo $line\n") +   // Print line.
-        std::string("    fi\n") +
-        std::string("done < ") + fileName;
-    system(commandLine.c_str());
+    std::fstream file; 
+    file.open(fileName, std::ios::in);
+    if (file.is_open()){
+        std::string line;
+        getline(file, line);
+        do{
+            std::cout << line << "";
+        }while (getline(file, line) && std::cin.ignore());
+    }
+    std::cout << std::endl;
     return 1;
 }
 
