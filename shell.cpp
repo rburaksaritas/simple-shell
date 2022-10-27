@@ -159,7 +159,9 @@ int main() {
         // Sets the command part from the given input command line.
         std::string command = parsedInput[0];
         // Pushes current command line to history as a whole string.
-        history.push_back(commandInput);
+        if(commandInput != ""){
+            history.push_back(commandInput);
+        }
         // Remove first element of history if the size exceeds 15.
         if (history.size()>15){
             history.erase(history.begin());
