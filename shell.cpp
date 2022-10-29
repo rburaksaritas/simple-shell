@@ -155,6 +155,7 @@ int main() {
     {
         printUserName();
         std::string commandInput = getCommandInput();
+        // Parses input line by whitespace.
         std::vector<std::string> parsedInput = parseCommandInput(commandInput);
         // Sets the command part from the given input command line.
         std::string command = parsedInput[0];
@@ -162,7 +163,7 @@ int main() {
         if(commandInput != ""){
             history.push_back(commandInput);
         }
-        // Remove first element of history if the size exceeds 15.
+        // Removes first element of history if the size exceeds 15.
         if (history.size()>15){
             history.erase(history.begin());
         }        
