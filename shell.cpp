@@ -117,12 +117,14 @@ int printFile(std::string sourceFile, std::string newFile){
 
 // Searches a simple command in up to maximum 15 commands 
 // that are executed before. The output is a simple "Yes" or "No".
-std::string didIDoThat(std::string commandLine, std::vector<std::string> history){
+int didIDoThat(std::string commandLine, std::vector<std::string> history){
     // Uses find() from <algorithm> library to see if the given command exists in history.
     if (std::find(history.begin(), history.end(), commandLine) != history.end()){
-        return "Yes";
+        std::cout << "Yes" << std::endl;
+        return 1;
     } else{
-        return "No";
+        std::cout << "No" << std::endl;
+        return -1;
     }
 }
 
@@ -196,7 +198,7 @@ int main() {
             std::string givenCommand = commandInput.substr(12, commandInput.length()-12);
             // remove last quote.
             givenCommand.pop_back();
-            std::cout << didIDoThat(givenCommand, history) << std::endl;
+            didIDoThat(givenCommand, history);
         } else if (command == hellotextCommand){
             helloText();
         } else if (command == ""){
