@@ -129,7 +129,7 @@ std::string didIDoThat(std::string commandLine, std::vector<std::string> history
 // Opens the default text editor.
 int helloText(){
     // Creates a new file named untitled.txt and opens it with default text editor.
-    std::string commandLine = "touch untitled.txt\n xdg-open untitled.txt";
+    std::string commandLine = "touch untitled.txt\n xdg-open untitled.txt\n";
     system(commandLine.c_str());
     return 1;
 }   
