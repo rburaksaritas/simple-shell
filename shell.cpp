@@ -128,10 +128,10 @@ int didIDoThat(std::string commandLine, std::vector<std::string> history){
     }
 }
 
-// Opens the default text editor.
+// Opens the gedit text editor.
 int helloText(){
-    // Creates a new file named untitled.txt and opens it with default text editor.
-    std::string commandLine = "touch untitled.txt\n xdg-open untitled.txt\n";
+    // Command line to open gedit text editor.
+    std::string commandLine = "gedit";
     system(commandLine.c_str());
     return 1;
 }   
